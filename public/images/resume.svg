@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1100" width="100%" height="100%">
+  <rect width="800" height="1100" fill="#ffffff" rx="12" stroke="#e2e8f0" stroke-width="2" />
+  
+  <!-- Header -->
+  <g transform="translate(60, 60)">
+    <text x="340" y="30" text-anchor="middle" font-family="'Georgia', serif" font-weight="bold" font-size="34" fill="#0f172a">Chandni Kumari</text>
+    <text x="340" y="58" text-anchor="middle" font-family="'Arial', sans-serif" font-weight="bold" font-size="20" fill="#2563eb">Data Analyst</text>
+    <text x="340" y="85" text-anchor="middle" font-family="'Arial', sans-serif" font-size="13" fill="#475569">
+      📞 +91-7019549199  |  ✉ vchandni040@gmail.com  |  🔗 linkedin.com/in/chandni-kumari-099117371  |  💻 github.com/Chandni-06
+    </text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="60" y1="165" x2="740" y2="165" stroke="#cbd5e1" stroke-width="1.5" />
+
+  <!-- Summary Section -->
+  <g transform="translate(60, 185)">
+    <text x="0" y="20" font-family="'Arial', sans-serif" font-weight="bold" font-size="17" fill="#0f172a">Summary</text>
+    <line x1="0" y1="28" x2="680" y2="28" stroke="#000000" stroke-width="1" />
+    <text x="0" y="52" font-family="'Arial', sans-serif" font-size="13.5" fill="#334155" line-height="1.5">
+      Aspiring Data Analyst with basic knowledge of SQL, Python, Excel, and Power BI. Skilled in dashboard creation and
+    </text>
+    <text x="0" y="72" font-family="'Arial', sans-serif" font-size="13.5" fill="#334155">
+      data analysis through projects, with a strong willingness to learn and grow.
+    </text>
+  </g>
+
+  <!-- Skills Section -->
+  <g transform="translate(60, 285)">
+    <text x="0" y="20" font-family="'Arial', sans-serif" font-weight="bold" font-size="17" fill="#0f172a">Skills</text>
+    <line x1="0" y1="28" x2="680" y2="28" stroke="#000000" stroke-width="1" />
+    
+    <text x="0" y="55" font-family="'Arial', sans-serif" font-weight="bold" font-size="14" fill="#0f172a">Programming &amp; Querying: <tspan font-weight="normal" fill="#334155">SQL, Python</tspan></text>
+    <text x="0" y="80" font-family="'Arial', sans-serif" font-weight="bold" font-size="14" fill="#0f172a">Data Visualization Tools: <tspan font-weight="normal" fill="#334155">MS Excel, Power BI</tspan></text>
+  </g>
+
+  <!-- Projects Section -->
+  <g transform="translate(60, 395)">
+    <text x="0" y="20" font-family="'Arial', sans-serif" font-weight="bold" font-size="17" fill="#0f172a">Projects</text>
+    <line x1="0" y1="28" x2="680" y2="28" stroke="#000000" stroke-width="1" />
+
+    <!-- Project 1 -->
+    <text x="0" y="58" font-family="'Arial', sans-serif" font-weight="bold" font-style="italic" font-size="15" fill="#0f172a">Company Sales Dashboard | Power BI</text>
+    <text x="680" y="58" text-anchor="end" font-family="'Arial', sans-serif" font-weight="bold" font-size="14" fill="#0f172a">Jan 2026</text>
+    
+    <text x="15" y="82" font-family="'Arial', sans-serif" font-size="13" fill="#334155">–  Built an interactive sales dashboard using Microsoft Power BI to analyze company sales data.</text>
+    <text x="15" y="104" font-family="'Arial', sans-serif" font-size="13" fill="#334155">–  Created visualizations such as charts, KPI indicators, and <tspan font-weight="bold">map-based analysis</tspan> to track regional sales performance.</text>
+    <text x="15" y="126" font-family="'Arial', sans-serif" font-size="13" fill="#334155">–  Used Microsoft Excel for data cleaning and preparation.</text>
+    <text x="15" y="148" font-family="'Arial', sans-serif" font-size="13" fill="#334155">–  Implemented slicers and filters for dynamic data exploration.</text>
+
+    <!-- Project 2 -->
+    <text x="0" y="192" font-family="'Arial', sans-serif" font-weight="bold" font-style="italic" font-size="15" fill="#0f172a">Population of India Dashboard | Data Analysis Project</text>
+    <text x="680" y="192" text-anchor="end" font-family="'Arial', sans-serif" font-weight="bold" font-size="14" fill="#0f172a">Feb 2026</text>
+    
+    <text x="15" y="216" font-family="'Arial', sans-serif" font-size="13" fill="#334155">–  Built an interactive population analysis dashboard using Microsoft Power BI.</text>
+    <text x="15" y="238" font-family="'Arial', sans-serif" font-size="13" fill="#334155">–  Analysed <tspan font-weight="bold">state population and geographical area data</tspan> to understand regional distribution and density.</text>
+    <text x="15" y="260" font-family="'Arial', sans-serif" font-size="13" fill="#334155">–  Designed visualizations including <tspan font-weight="bold">maps, charts, and filters</tspan> for state-wise insights.</text>
+  </g>
+
+  <!-- Education Section -->
+  <g transform="translate(60, 685)">
+    <text x="0" y="20" font-family="'Arial', sans-serif" font-weight="bold" font-size="17" fill="#0f172a">Education</text>
+    <line x1="0" y1="28" x2="680" y2="28" stroke="#000000" stroke-width="1" />
+
+    <text x="0" y="58" font-family="'Arial', sans-serif" font-weight="bold" font-size="14" fill="#0f172a">
+      Matriculation – Jharkhand Academic Council, Ranchi (2022) – 79.09%
+    </text>
+    
+    <text x="0" y="90" font-family="'Arial', sans-serif" font-weight="bold" font-size="14" fill="#0f172a">
+      12<tspan font-size="10" baseline-shift="super">TH</tspan> - Central Board of Secondary Education, Bangalore (2024) – 60%
+    </text>
+
+    <text x="0" y="122" font-family="'Arial', sans-serif" font-weight="bold" font-size="14" fill="#0f172a">
+      B.C.A – Bengaluru City University, Bangalore (Pursuing)
+    </text>
+  </g>
+
+  <line x1="60" y1="1020" x2="740" y2="1020" stroke="#cbd5e1" stroke-width="1" />
+</svg>

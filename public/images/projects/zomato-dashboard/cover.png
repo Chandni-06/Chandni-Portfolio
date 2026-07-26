@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#090D16" />
+    </linearGradient>
+    <linearGradient id="zomatoRed" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E23744" />
+      <stop offset="100%" stop-color="#FF525D" />
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="accentGold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#FBBF24" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bg)" />
+
+  <!-- Grid overlay -->
+  <path d="M0,75 L1200,75 M0,150 L1200,150 M0,225 L1200,225 M0,300 L1200,300 M0,375 L1200,375 M0,450 L1200,450 M0,525 L1200,525 M0,600 L1200,600" stroke="#334155" stroke-opacity="0.25" stroke-dasharray="4,4" />
+  <path d="M150,0 L150,675 M300,0 L300,675 M450,0 L450,675 M600,0 L600,675 M750,0 L750,675 M900,0 L900,675 M1050,0 L1050,675" stroke="#334155" stroke-opacity="0.25" stroke-dasharray="4,4" />
+
+  <!-- Glowing background shapes -->
+  <circle cx="200" cy="150" r="250" fill="#E23744" opacity="0.12" filter="blur(60px)" />
+  <circle cx="1000" cy="500" r="220" fill="#F59E0B" opacity="0.1" filter="blur(60px)" />
+
+  <!-- Top Header Bar -->
+  <rect x="40" y="30" width="1120" height="70" rx="16" fill="url(#cardBg)" stroke="#334155" filter="url(#shadow)" />
+  <rect x="60" y="45" width="40" height="40" rx="10" fill="url(#zomatoRed)" />
+  <text x="80" y="70" font-family="Outfit, Arial, sans-serif" font-weight="900" font-size="22" fill="#FFFFFF" text-anchor="middle">Z</text>
+  <text x="115" y="62" font-family="Outfit, Arial, sans-serif" font-weight="800" font-size="20" fill="#FFFFFF">ZOMATO RESTAURANT ANALYSIS</text>
+  <text x="115" y="82" font-family="Arial, sans-serif" font-weight="600" font-size="12" fill="#94A3B8">POWER BI EXECUTIVE ANALYTICS DASHBOARD</text>
+
+  <!-- Power BI Badge -->
+  <rect x="980" y="47" width="160" height="36" rx="10" fill="#F2C811" fill-opacity="0.2" stroke="#F2C811" stroke-opacity="0.5" />
+  <text x="1060" y="70" font-family="Arial, sans-serif" font-weight="800" font-size="13" fill="#F2C811" text-anchor="middle">POWER BI REPORT</text>
+
+  <!-- KPI Cards Row -->
+  <!-- KPI 1: Total Restaurants -->
+  <g transform="translate(40, 120)">
+    <rect width="260" height="110" rx="16" fill="url(#cardBg)" stroke="#334155" filter="url(#shadow)" />
+    <rect x="0" y="0" width="6" height="110" rx="3" fill="#E23744" />
+    <text x="25" y="35" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#94A3B8" letter-spacing="1">TOTAL RESTAURANTS</text>
+    <text x="25" y="75" font-family="Outfit, Arial, sans-serif" font-size="34" font-weight="900" fill="#FFFFFF">9,551</text>
+    <text x="165" y="75" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#10B981">+12.4% YoY</text>
+  </g>
+
+  <!-- KPI 2: Average Rating -->
+  <g transform="translate(325, 120)">
+    <rect width="260" height="110" rx="16" fill="url(#cardBg)" stroke="#334155" filter="url(#shadow)" />
+    <rect x="0" y="0" width="6" height="110" rx="3" fill="#F59E0B" />
+    <text x="25" y="35" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#94A3B8" letter-spacing="1">AVERAGE RATING</text>
+    <text x="25" y="75" font-family="Outfit, Arial, sans-serif" font-size="34" font-weight="900" fill="#F59E0B">4.21 ★</text>
+    <text x="165" y="75" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#38BDF8">Out of 5.0</text>
+  </g>
+
+  <!-- KPI 3: Avg Cost for Two -->
+  <g transform="translate(610, 120)">
+    <rect width="260" height="110" rx="16" fill="url(#cardBg)" stroke="#334155" filter="url(#shadow)" />
+    <rect x="0" y="0" width="6" height="110" rx="3" fill="#10B981" />
+    <text x="25" y="35" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#94A3B8" letter-spacing="1">AVG COST FOR TWO</text>
+    <text x="25" y="75" font-family="Outfit, Arial, sans-serif" font-size="34" font-weight="900" fill="#FFFFFF">₹580</text>
+    <text x="155" y="75" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#10B981">Mid-Range</text>
+  </g>
+
+  <!-- KPI 4: Online Delivery % -->
+  <g transform="translate(895, 120)">
+    <rect width="265" height="110" rx="16" fill="url(#cardBg)" stroke="#334155" filter="url(#shadow)" />
+    <rect x="0" y="0" width="6" height="110" rx="3" fill="#38BDF8" />
+    <text x="25" y="35" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#94A3B8" letter-spacing="1">ONLINE DELIVERY</text>
+    <text x="25" y="75" font-family="Outfit, Arial, sans-serif" font-size="34" font-weight="900" fill="#38BDF8">78.4%</text>
+    <text x="170" y="75" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#94A3B8">7,488 Rest.</text>
+  </g>
+
+  <!-- Main Chart Section Left: City Distribution Bar Chart -->
+  <g transform="translate(40, 250)">
+    <rect width="680" height="390" rx="16" fill="url(#cardBg)" stroke="#334155" filter="url(#shadow)" />
+    <text x="30" y="40" font-family="Outfit, Arial, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">RESTAURANTS BY MAJOR CITIES</text>
+    <text x="30" y="60" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Top cities with highest restaurant density &amp; order volume</text>
+
+    <!-- Bars -->
+    <g transform="translate(30, 85)">
+      <!-- New Delhi -->
+      <text x="0" y="20" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#CBD5E1">New Delhi</text>
+      <rect x="110" y="5" width="480" height="22" rx="6" fill="#E23744" />
+      <text x="600" y="21" font-family="Arial, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">5,473</text>
+
+      <!-- Gurgaon -->
+      <text x="0" y="60" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#CBD5E1">Gurgaon</text>
+      <rect x="110" y="45" width="180" height="22" rx="6" fill="#EF4444" opacity="0.85" />
+      <text x="300" y="61" font-family="Arial, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">1,118</text>
+
+      <!-- Noida -->
+      <text x="0" y="100" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#CBD5E1">Noida</text>
+      <rect x="110" y="85" width="130" height="22" rx="6" fill="#F59E0B" opacity="0.85" />
+      <text x="250" y="101" font-family="Arial, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">780</text>
+
+      <!-- Bengaluru -->
+      <text x="0" y="140" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#CBD5E1">Bengaluru</text>
+      <rect x="110" y="125" width="100" height="22" rx="6" fill="#10B981" opacity="0.85" />
+      <text x="220" y="141" font-family="Arial, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">591</text>
+
+      <!-- Mumbai -->
+      <text x="0" y="180" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#CBD5E1">Mumbai</text>
+      <rect x="110" y="165" width="85" height="22" rx="6" fill="#38BDF8" opacity="0.85" />
+      <text x="205" y="181" font-family="Arial, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">482</text>
+
+      <!-- Pune -->
+      <text x="0" y="220" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#CBD5E1">Pune</text>
+      <rect x="110" y="205" width="65" height="22" rx="6" fill="#6366F1" opacity="0.85" />
+      <text x="185" y="221" font-family="Arial, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">385</text>
+    </g>
+  </g>
+
+  <!-- Right Donut Chart: Popular Cuisines -->
+  <g transform="translate(740, 250)">
+    <rect width="420" height="390" rx="16" fill="url(#cardBg)" stroke="#334155" filter="url(#shadow)" />
+    <text x="30" y="40" font-family="Outfit, Arial, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">MOST POPULAR CUISINES</text>
+    <text x="30" y="60" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Percentage share of offerings</text>
+
+    <!-- Donut chart -->
+    <circle cx="150" cy="200" r="100" fill="none" stroke="#334155" stroke-width="35" />
+    <circle cx="150" cy="200" r="100" fill="none" stroke="#E23744" stroke-width="35" stroke-dasharray="210 628" />
+    <circle cx="150" cy="200" r="100" fill="none" stroke="#F59E0B" stroke-width="35" stroke-dasharray="140 628" stroke-dashoffset="-210" />
+    <circle cx="150" cy="200" r="100" fill="none" stroke="#10B981" stroke-width="35" stroke-dasharray="110 628" stroke-dashoffset="-350" />
+    <circle cx="150" cy="200" r="100" fill="none" stroke="#38BDF8" stroke-width="35" stroke-dasharray="85 628" stroke-dashoffset="-460" />
+    <circle cx="150" cy="200" r="100" fill="none" stroke="#8B5CF6" stroke-width="35" stroke-dasharray="83 628" stroke-dashoffset="-545" />
+
+    <text x="150" y="195" font-family="Outfit, Arial, sans-serif" font-size="22" font-weight="900" fill="#FFFFFF" text-anchor="middle">9.5k+</text>
+    <text x="150" y="215" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#94A3B8" text-anchor="middle">TOTAL LISTINGS</text>
+
+    <!-- Legend -->
+    <g transform="translate(270, 110)">
+      <circle cx="10" cy="10" r="6" fill="#E23744" />
+      <text x="25" y="14" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">North Indian (34%)</text>
+
+      <circle cx="10" cy="40" r="6" fill="#F59E0B" />
+      <text x="25" y="44" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Chinese (22%)</text>
+
+      <circle cx="10" cy="70" r="6" fill="#10B981" />
+      <text x="25" y="74" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Fast Food (18%)</text>
+
+      <circle cx="10" cy="100" r="6" fill="#38BDF8" />
+      <text x="25" y="104" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Mughlai (14%)</text>
+
+      <circle cx="10" cy="130" r="6" fill="#8B5CF6" />
+      <text x="25" y="134" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Bakery &amp; Desserts (12%)</text>
+    </g>
+  </g>
+</svg>
