@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Download, FileText, CheckCircle2, Award, BookOpen, ExternalLink } from 'lucide-react';
+import { X, Download, FileText, CheckCircle2, Award, BookOpen, ExternalLink, Eye } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 
 interface ResumeModalProps {
@@ -149,17 +149,29 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           </div>
 
           {/* Modal Footer */}
-          <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between">
+          <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between flex-wrap gap-3">
             <span className="text-xs text-slate-400">PDF Format • Updated 2026</span>
-            <a
-              href={PORTFOLIO_DATA.personal.resumePdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-colors cursor-pointer"
-            >
-              <Download className="w-4 h-4" />
-              <span>Open / Download Resume PDF</span>
-            </a>
+            <div className="flex items-center gap-2">
+              <a
+                href="/images/Chandni Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                id="modal-view-pdf-btn"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-400 text-xs font-bold transition-colors cursor-pointer border border-slate-700"
+              >
+                <Eye className="w-4 h-4" />
+                <span>View PDF</span>
+              </a>
+              <a
+                href="/images/Chandni Resume.pdf"
+                download="Chandni Resume.pdf"
+                id="modal-download-pdf-btn"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-colors cursor-pointer shadow-md shadow-blue-500/20"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download Resume</span>
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>

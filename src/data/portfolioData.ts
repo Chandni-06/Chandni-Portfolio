@@ -64,7 +64,7 @@ export const PORTFOLIO_DATA = {
     location: "Bengaluru, Karnataka, India",
     github: "https://github.com/Chandni-06",
     linkedin: "https://www.linkedin.com/in/chandni-kumari-099117371",
-    resumePdf: "https://drive.google.com/file/d/18rmJ6A3lFvlLFcCDwUEEdxMTXH062Od5/view?usp=sharing",
+    resumePdf: "/images/Chandni_Resume.pdf",
     targetCompanies: [
       { name: "Deloitte", logo: "Building2" },
       { name: "Accenture", logo: "Briefcase" },

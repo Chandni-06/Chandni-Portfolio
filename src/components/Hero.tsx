@@ -321,14 +321,15 @@ export const Hero: React.FC = () => {
 
             {/* Buttons Row */}
             <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-              <button
-                onClick={() => handleScrollTo('resume')}
+              <a
+                href="/images/Chandni_Resume.pdf"
+                download="Chandni_Resume.pdf"
                 id="hero-download-resume-btn"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-blue-700 to-sky-600 text-white font-bold text-sm shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 hover:-translate-y-0.5 transition-all cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>Download Resume</span>
-              </button>
+              </a>
 
               <button
                 onClick={() => handleScrollTo('projects')}

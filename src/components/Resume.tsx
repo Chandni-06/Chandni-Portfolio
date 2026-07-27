@@ -1,11 +1,45 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { Download, Eye, FileText, Sparkles, CheckCircle2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Download, Eye, FileText, Sparkles, CheckCircle2, AlertCircle, X, ShieldCheck } from 'lucide-react';
 import { ResumeModal } from './ResumeModal';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 
 export const Resume: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const resumeFilePath = PORTFOLIO_DATA.personal.resumePdf || '/images/Chandni Resume.pdf';
+
+  const showUnavailableToast = () => {
+    setToastMessage('Resume is currently unavailable.');
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 4000);
+  };
+
+  const handleDownload = async (e: React.MouseEvent) => {
+    try {
+      const response = await fetch(resumeFilePath, { method: 'HEAD' });
+      if (!response.ok && response.status !== 200 && response.status !== 304) {
+        e.preventDefault();
+        showUnavailableToast();
+      }
+    } catch {
+      // If fetch fails, allow standard link download attempt but fallback if error
+    }
+  };
+
+  const handleViewPdf = async (e: React.MouseEvent) => {
+    try {
+      const response = await fetch(resumeFilePath, { method: 'HEAD' });
+      if (!response.ok && response.status !== 200 && response.status !== 304) {
+        e.preventDefault();
+        showUnavailableToast();
+      }
+    } catch {
+      // Allow link click
+    }
+  };
 
   return (
     <section id="resume" className="py-20 relative">
@@ -42,7 +76,7 @@ export const Resume: React.FC = () => {
           />
 
           <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
-            Download or preview my structured resume detailing my BCA academic performance, Power BI projects, SQL expertise, and analytical competencies.
+            Download or view my official resume PDF detailing my BCA academic performance, Power BI dashboards, SQL query design, and data analysis skills.
           </p>
         </div>
 
@@ -56,21 +90,59 @@ export const Resume: React.FC = () => {
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               
-              {/* Left Column: Image Preview Mock */}
-              <div className="lg:col-span-5 relative group cursor-pointer" onClick={() => setIsModalOpen(true)}>
-                <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-300 dark:border-slate-700 bg-slate-900 aspect-[3/4]">
-                  <img
-                    src="/images/resume.svg"
-                    alt="Chandni Kumari Resume Preview"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="px-4 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-lg flex items-center gap-2">
-                      <Eye className="w-4 h-4" /> Click to Expand
+              {/* Left Column: Official PDF Document Preview Card */}
+              <div className="lg:col-span-5 relative group">
+                <a
+                  href={resumeFilePath}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleViewPdf}
+                  className="block relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 p-6 aspect-[3/4] flex flex-col justify-between group-hover:border-sky-500/50 transition-all duration-300"
+                >
+                  {/* Card Header */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-sky-400">
+                      <FileText className="w-6 h-6" />
+                      <span className="text-xs font-bold uppercase tracking-wider">PDF Document</span>
+                    </div>
+                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30">
+                      1 Page
                     </span>
                   </div>
-                </div>
+
+                  {/* Document Graphic Mock */}
+                  <div className="my-auto space-y-3 p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 shadow-inner">
+                    <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
+                      <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                      <div>
+                        <p className="text-xs font-bold text-white">Chandni Kumari</p>
+                        <p className="text-[10px] text-slate-400">Data Analyst Resume</p>
+                      </div>
+                    </div>
+                    <div className="space-y-1.5 pt-1">
+                      <div className="h-2 bg-slate-700/60 rounded w-3/4" />
+                      <div className="h-2 bg-slate-700/40 rounded w-full" />
+                      <div className="h-2 bg-slate-700/40 rounded w-5/6" />
+                      <div className="h-2 bg-blue-500/40 rounded w-2/3" />
+                      <div className="h-2 bg-slate-700/40 rounded w-4/5" />
+                    </div>
+                  </div>
+
+                  {/* Card Footer */}
+                  <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
+                    <span>Chandni Resume.pdf</span>
+                    <span className="text-sky-400 font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                      <Eye className="w-3.5 h-3.5" /> View PDF
+                    </span>
+                  </div>
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                    <span className="px-4 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-xl flex items-center gap-2">
+                      <Eye className="w-4 h-4" /> Open PDF in New Tab
+                    </span>
+                  </div>
+                </a>
               </div>
 
               {/* Right Column: Resume Highlights & CTAs */}
@@ -78,18 +150,18 @@ export const Resume: React.FC = () => {
                 <div>
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-xs font-bold mb-3">
                     <Sparkles className="w-3.5 h-3.5" />
-                    <span>Verified Resume Snapshot</span>
+                    <span>Official Candidate Resume</span>
                   </div>
 
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white font-outfit mb-2">
                     Chandni Kumari
                   </h3>
                   <p className="text-sm font-bold text-blue-600 dark:text-sky-400 mb-4">
-                    Aspiring Data Analyst • BCA Final Year (8.8 CGPA)
+                    Aspiring Data Analyst • BCA Final Year
                   </p>
 
                   <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6 font-normal">
-                    Comprehensive, recruiter-tailored resume detailing my technical skill set across Power BI dashboard development, SQL query design, Python data manipulation, and academic projects.
+                    Recruiter-focused resume highlighting my expertise in Power BI dashboard development, SQL database querying, Python data analysis, and academic performance.
                   </p>
 
                   {/* Bullet Highlights */}
@@ -104,7 +176,7 @@ export const Resume: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-2.5">
                       <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                      <span>Prepared for Data Internship Technical &amp; HR Rounds</span>
+                      <span>Ready for Data Analyst Entry-Level &amp; Internship Roles</span>
                     </div>
                   </div>
                 </div>
@@ -112,9 +184,9 @@ export const Resume: React.FC = () => {
                 {/* Buttons Row */}
                 <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-200 dark:border-slate-800">
                   <a
-                    href={PORTFOLIO_DATA.personal.resumePdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={resumeFilePath}
+                    download="Chandni_Resume.pdf"
+                    onClick={handleDownload}
                     id="resume-download-btn"
                     className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-blue-500/25 hover:shadow-blue-500/35 hover:-translate-y-0.5 transition-all cursor-pointer"
                   >
@@ -122,13 +194,25 @@ export const Resume: React.FC = () => {
                     <span>Download Resume</span>
                   </a>
 
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    id="resume-view-btn"
+                  <a
+                    href={resumeFilePath}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleViewPdf}
+                    id="resume-view-pdf-btn"
                     className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-xs sm:text-sm border border-slate-300 dark:border-slate-700 hover:bg-slate-300 dark:hover:bg-slate-700 hover:-translate-y-0.5 transition-all cursor-pointer"
                   >
                     <Eye className="w-4 h-4 text-sky-500" />
-                    <span>View Interactive Resume</span>
+                    <span>View Resume</span>
+                  </a>
+
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    id="resume-interactive-view-btn"
+                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-sky-500/10 dark:bg-sky-400/10 text-blue-600 dark:text-sky-300 font-bold text-xs hover:bg-sky-500/20 transition-all cursor-pointer border border-sky-400/20"
+                  >
+                    <FileText className="w-4 h-4" />
+                    <span>Interactive Breakdown</span>
                   </button>
                 </div>
 
@@ -142,6 +226,32 @@ export const Resume: React.FC = () => {
         <ResumeModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
       </div>
+
+      {/* Floating Unavailable Toast Notification */}
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="fixed bottom-6 right-6 z-50 max-w-sm w-full px-4"
+          >
+            <div className="p-4 rounded-2xl bg-slate-900/95 text-white border border-rose-500/50 shadow-2xl backdrop-blur-xl flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5 text-rose-400">
+                <AlertCircle className="w-5 h-5 shrink-0" />
+                <span className="text-xs font-bold text-white">{toastMessage}</span>
+              </div>
+              <button
+                onClick={() => setToastMessage(null)}
+                className="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
+
