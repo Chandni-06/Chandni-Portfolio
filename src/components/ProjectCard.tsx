@@ -1,17 +1,20 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Github, ExternalLink, BookOpen, Clock, CheckCircle2, Layers, Download, Lightbulb, TrendingUp } from 'lucide-react';
-import { Project } from '../data/portfolioData';
-import { ProjectGallery } from './ProjectGallery';
+import React from "react";
+import { motion } from "motion/react";
+import { Clock, CheckCircle2, Layers, ArrowRight, Youtube } from "lucide-react";
+import { Project } from "../data/portfolioData";
+import { Link } from "react-router-dom";
 
-import { formatImageUrl } from '../lib/utils';
+import { formatImageUrl, isYouTubeUrl } from "../lib/utils";
 
 interface ProjectCardProps {
   project: Project;
-  onOpenCaseStudy: (project: Project) => void;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenCaseStudy }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const previewFeatures = project.features.slice(0, 2);
+  const previewTech = project.technologies.slice(0, 3);
+  const hasYouTubeVideo = isYouTubeUrl(project.liveDemoUrl);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 25 }}
@@ -43,130 +46,81 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenCaseStu
         </div>
 
         {/* Content Body */}
-        <div className="p-6 sm:p-8 space-y-6">
+        <div className="p-5 sm:p-6 space-y-4">
           <div>
-            <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white font-outfit group-hover:text-blue-600 dark:group-hover:text-sky-400 transition-colors">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white font-outfit group-hover:text-blue-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2">
               {project.title}
             </h3>
-            <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed font-normal">
+            <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed font-normal line-clamp-3">
               {project.description}
             </p>
           </div>
 
-          {/* Business Problem Box */}
-          {project.caseStudy?.problemStatement && (
-            <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-              <span className="font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5 mb-1">
-                <Lightbulb className="w-3.5 h-3.5 text-amber-500" /> Business Problem
-              </span>
-              <p className="line-clamp-2">{project.caseStudy.problemStatement}</p>
-            </div>
-          )}
-
           {/* Tech Badges */}
           <div className="flex flex-wrap gap-2">
-            {project.technologies.map((tech) => (
+            {previewTech.map((tech) => (
               <span
                 key={tech}
-                className="px-2.5 py-1 rounded-lg bg-blue-500/10 dark:bg-sky-500/15 border border-blue-500/20 text-blue-700 dark:text-sky-300 text-xs font-semibold"
+                className="px-2.5 py-1 rounded-lg bg-blue-500/10 dark:bg-sky-500/15 border border-blue-500/20 text-blue-700 dark:text-sky-300 text-[11px] font-semibold"
               >
                 {tech}
               </span>
             ))}
+            {project.technologies.length > previewTech.length && (
+              <span className="px-2.5 py-1 rounded-lg bg-slate-200/70 dark:bg-slate-800/70 border border-slate-300/60 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-[11px] font-semibold">
+                +{project.technologies.length - previewTech.length} more
+              </span>
+            )}
           </div>
 
           {/* Key Features List */}
           <div className="space-y-2 pt-1">
             <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5 text-blue-600 dark:text-sky-400" />
-              <span>Key Features &amp; Deliverables</span>
+              <span>Highlights</span>
             </p>
             <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
-              {project.features.map((feat, idx) => (
+              {previewFeatures.map((feat, idx) => (
                 <li key={idx} className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                   <span>{feat}</span>
                 </li>
               ))}
+              {project.features.length > previewFeatures.length && (
+                <li className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 pl-6">
+                  +{project.features.length - previewFeatures.length} more
+                  points in detail page
+                </li>
+              )}
             </ul>
           </div>
-
-          {/* Business Insights Preview */}
-          {project.caseStudy?.keyInsights && project.caseStudy.keyInsights.length > 0 && (
-            <div className="space-y-2 pt-1">
-              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
-                <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
-                <span>Business Insights</span>
-              </p>
-              <ul className="space-y-1 text-xs text-slate-700 dark:text-slate-300 font-medium">
-                {project.caseStudy.keyInsights.slice(0, 3).map((insight, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
-                    <span className="line-clamp-2">{insight}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* Project Image Gallery Component */}
-          {project.gallery && project.gallery.length > 0 && (
-            <div className="pt-2">
-              <ProjectGallery gallery={project.gallery} projectTitle={project.title} />
-            </div>
-          )}
         </div>
       </div>
 
       {/* Action Buttons Footer */}
-      <div className="p-6 sm:p-8 pt-0 flex flex-wrap items-center justify-between gap-2.5 border-t border-slate-200/60 dark:border-slate-800/60 mt-6">
-        <div className="flex items-center gap-2 flex-wrap">
+      <div className="p-5 sm:p-6 pt-0 flex items-center justify-end gap-3 border-t border-slate-200/60 dark:border-slate-800/60 mt-4">
+        {hasYouTubeVideo && (
           <a
             href={project.liveDemoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            id={`project-demo-btn-${project.id}`}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition-colors cursor-pointer shadow-md shadow-blue-500/20"
+            id={`project-youtube-btn-${project.id}`}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-red-600 text-white text-xs font-bold hover:bg-red-700 transition-colors cursor-pointer shadow-md shadow-red-500/20"
+            title="Watch screen recording on YouTube"
           >
-            <ExternalLink className="w-3.5 h-3.5" />
-            <span>Live Demo</span>
+            <Youtube className="w-3.5 h-3.5" />
+            <span>YouTube</span>
           </a>
+        )}
 
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            id={`project-github-btn-${project.id}`}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors cursor-pointer"
-          >
-            <Github className="w-3.5 h-3.5" />
-            <span>GitHub</span>
-          </a>
-        </div>
-
-        <div className="flex items-center gap-2 flex-wrap">
-          <button
-            onClick={() => onOpenCaseStudy(project)}
-            id={`project-casestudy-btn-${project.id}`}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-sky-500/10 dark:bg-sky-400/10 border border-sky-400/30 text-blue-600 dark:text-sky-300 text-xs font-bold hover:bg-sky-500/20 transition-colors cursor-pointer"
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Case Study</span>
-          </button>
-
-          {project.reportUrl && (
-            <a
-              href={formatImageUrl(project.reportUrl)}
-              target="_blank"
-              rel="noopener noreferrer"
-              id={`project-report-btn-${project.id}`}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold hover:bg-emerald-500/20 transition-colors cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>Report</span>
-            </a>
-          )}
-        </div>
+        <Link
+          to={`/projects/${project.id}`}
+          id={`project-detail-btn-${project.id}`}
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition-colors cursor-pointer shadow-md shadow-blue-500/20"
+        >
+          <ArrowRight className="w-3.5 h-3.5" />
+          <span>View Details</span>
+        </Link>
       </div>
     </motion.div>
   );

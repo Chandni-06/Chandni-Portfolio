@@ -1,9 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
-import { Download, Eye, Mail, BarChart3, Database, FileCode2, Sheet, Sparkles, Building2, Linkedin, Github, Phone } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../data/portfolioData';
-import { ParticlesBackground } from './ParticlesBackground';
-import { formatImageUrl } from '../lib/utils';
+import React, { useState, useEffect } from "react";
+import { motion } from "motion/react";
+import {
+  Download,
+  Eye,
+  Mail,
+  BarChart3,
+  Database,
+  FileCode2,
+  Sheet,
+  Sparkles,
+  Building2,
+  Linkedin,
+  Github,
+  Phone,
+} from "lucide-react";
+import { PORTFOLIO_DATA } from "../data/portfolioData";
+import { ParticlesBackground } from "./ParticlesBackground";
+import { formatImageUrl } from "../lib/utils";
 
 interface ProfileCardProps {
   className?: string;
@@ -24,67 +37,98 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ className = "" }) => {
       {/* Floating Animated Tech Badge 1: Top Left - Power BI */}
       <motion.div
         animate={{ y: [0, -10, 0], x: [0, -4, 0] }}
-        transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
         className="absolute -top-3 left-0 sm:top-4 sm:-left-4 z-30 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl glass-card border border-amber-500/50 shadow-2xl flex items-center gap-3 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80"
       >
         <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-500 font-extrabold shadow-sm">
           <BarChart3 className="w-5 h-5 text-amber-500" />
         </div>
         <div className="text-left">
-          <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-extrabold">BI Tool</p>
-          <p className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">Power BI</p>
+          <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-extrabold">
+            BI Tool
+          </p>
+          <p className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">
+            Power BI
+          </p>
         </div>
       </motion.div>
 
       {/* Floating Animated Tech Badge 2: Top Right - SQL */}
       <motion.div
         animate={{ y: [0, 10, 0], x: [0, 4, 0] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
+        transition={{
+          duration: 4.8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.6,
+        }}
         className="absolute -top-3 right-0 sm:top-4 sm:-right-4 z-30 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl glass-card border border-blue-500/50 shadow-2xl flex items-center gap-3 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80"
       >
         <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-500 font-extrabold shadow-sm">
           <Database className="w-5 h-5 text-blue-500" />
         </div>
         <div className="text-left">
-          <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-extrabold">Database</p>
-          <p className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">SQL</p>
+          <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-extrabold">
+            Database
+          </p>
+          <p className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">
+            SQL
+          </p>
         </div>
       </motion.div>
 
       {/* Floating Animated Tech Badge 3: Bottom Left - Python */}
       <motion.div
         animate={{ y: [0, 10, 0], x: [0, -4, 0] }}
-        transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
+        transition={{
+          duration: 5.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1.2,
+        }}
         className="absolute top-60 -left-2 sm:top-72 sm:-left-6 z-30 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl glass-card border border-sky-400/50 shadow-2xl flex items-center gap-3 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80"
       >
         <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-400 font-extrabold shadow-sm">
           <FileCode2 className="w-5 h-5 text-sky-400" />
         </div>
         <div className="text-left">
-          <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-extrabold">Code</p>
-          <p className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">Python</p>
+          <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-extrabold">
+            Code
+          </p>
+          <p className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">
+            Python
+          </p>
         </div>
       </motion.div>
 
       {/* Floating Animated Tech Badge 4: Bottom Right - Excel */}
       <motion.div
         animate={{ y: [0, -10, 0], x: [0, 4, 0] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 1.8 }}
+        transition={{
+          duration: 4.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1.8,
+        }}
         className="absolute top-60 -right-2 sm:top-72 sm:-right-6 z-30 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl glass-card border border-emerald-500/50 shadow-2xl flex items-center gap-3 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80"
       >
         <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-500 font-extrabold shadow-sm">
           <Sheet className="w-5 h-5 text-emerald-500" />
         </div>
         <div className="text-left">
-          <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-extrabold">Spreadsheet</p>
-          <p className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">Excel</p>
+          <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-extrabold">
+            Spreadsheet
+          </p>
+          <p className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">
+            Excel
+          </p>
         </div>
       </motion.div>
 
       {/* Circular Profile Frame Wrapper (Large: 420px on desktop) */}
-      <motion.div 
+      <motion.div
         animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="relative my-2 z-10"
       >
         {/* Soft Radial Glow behind frame */}
@@ -100,7 +144,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ className = "" }) => {
             src={formatImageUrl(PORTFOLIO_DATA.personal.profileImage)}
             alt="Chandni Kumari - Aspiring Data Analyst"
             onError={(e) => {
-              (e.target as HTMLImageElement).src = '/images/profile.svg';
+              (e.target as HTMLImageElement).src = "/images/profile.svg";
             }}
             className="w-full h-full object-cover object-top rounded-full transform group-hover:scale-105 transition-transform duration-700"
             referrerPolicy="no-referrer"
@@ -120,7 +164,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ className = "" }) => {
       </motion.div>
 
       {/* Premium Glassmorphism Information Card Overlapping Below Profile */}
-      <motion.div 
+      <motion.div
         whileHover={{ y: -4, scale: 1.02 }}
         className="w-full max-w-lg mt-4 z-20 p-5 sm:p-6 rounded-3xl glass-card border border-white/80 dark:border-slate-800 shadow-2xl shadow-blue-500/15 backdrop-blur-2xl bg-white/90 dark:bg-slate-900/90 flex flex-col items-center text-center"
       >
@@ -131,22 +175,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ className = "" }) => {
         <p className="text-sm sm:text-base font-extrabold bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-500 bg-clip-text text-transparent mt-0.5">
           Aspiring Data Analyst
         </p>
-
-        {/* Skill Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mt-3 mb-4">
-          <span className="px-2.5 py-1 rounded-lg bg-yellow-500/10 dark:bg-yellow-500/20 border border-yellow-500/30 text-yellow-700 dark:text-yellow-300 text-xs font-bold flex items-center gap-1">
-            <BarChart3 className="w-3.5 h-3.5 text-yellow-500" /> Power BI
-          </span>
-          <span className="px-2.5 py-1 rounded-lg bg-blue-500/10 dark:bg-blue-500/20 border border-blue-500/30 text-blue-700 dark:text-blue-300 text-xs font-bold flex items-center gap-1">
-            <Database className="w-3.5 h-3.5 text-blue-500" /> SQL
-          </span>
-          <span className="px-2.5 py-1 rounded-lg bg-sky-500/10 dark:bg-sky-500/20 border border-sky-400/30 text-sky-700 dark:text-sky-300 text-xs font-bold flex items-center gap-1">
-            <FileCode2 className="w-3.5 h-3.5 text-sky-400" /> Python
-          </span>
-          <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold flex items-center gap-1">
-            <Sheet className="w-3.5 h-3.5 text-emerald-500" /> Excel
-          </span>
-        </div>
 
         {/* Social Icons Row */}
         <div className="flex items-center justify-center gap-3 w-full pt-3 border-t border-slate-200/80 dark:border-slate-800">
@@ -205,10 +233,10 @@ export const Hero: React.FC = () => {
     "Aspiring Data Analyst",
     "Power BI & SQL Specialist",
     "Dashboard Developer",
-    "Data Visualization Enthusiast"
+    "Data Visualization Enthusiast",
   ];
   const [titleIndex, setTitleIndex] = useState(0);
-  const [displayText, setDisplayText] = useState('');
+  const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -239,12 +267,15 @@ export const Hero: React.FC = () => {
       const navOffset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     }
   };
 
   return (
-    <section id="home" className="relative min-h-screen pt-28 pb-16 flex flex-col justify-center overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen pt-28 pb-16 flex flex-col justify-center overflow-hidden"
+    >
       {/* Background Particles Canvas */}
       <ParticlesBackground />
 
@@ -254,7 +285,6 @@ export const Hero: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
           {/* Left Column Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -287,7 +317,7 @@ export const Hero: React.FC = () => {
 
             {/* Dynamic Typing Title */}
             <div className="h-10 sm:h-12 flex items-center mb-4">
-              <span className="text-xl sm:text-3xl font-bold text-slate-800 dark:text-slate-200 font-outfit">
+              <span className="text-xl sm:text-3xl font-semibold italic tracking-wide text-slate-800 dark:text-slate-200 font-['Playfair_Display']">
                 {displayText}
               </span>
               <span className="w-0.5 h-7 sm:h-8 bg-sky-500 ml-1.5 animate-pulse" />
@@ -332,7 +362,7 @@ export const Hero: React.FC = () => {
               </a>
 
               <button
-                onClick={() => handleScrollTo('projects')}
+                onClick={() => handleScrollTo("projects")}
                 id="hero-view-projects-btn"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-slate-200 dark:bg-slate-800/90 text-slate-900 dark:text-white font-bold text-sm border border-slate-300 dark:border-slate-700 hover:bg-slate-300 dark:hover:bg-slate-700 hover:-translate-y-0.5 transition-all cursor-pointer"
               >
@@ -341,7 +371,7 @@ export const Hero: React.FC = () => {
               </button>
 
               <button
-                onClick={() => handleScrollTo('contact')}
+                onClick={() => handleScrollTo("contact")}
                 id="hero-contact-me-btn"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-sky-500/10 dark:bg-sky-400/10 text-blue-600 dark:text-sky-300 font-bold text-sm border border-blue-500/30 dark:border-sky-400/30 hover:bg-sky-500/20 transition-all cursor-pointer"
               >
@@ -355,33 +385,7 @@ export const Hero: React.FC = () => {
           <div className="lg:col-span-7 hidden lg:flex justify-center my-6 lg:my-0">
             <ProfileCard />
           </div>
-
         </div>
-
-        {/* Target Companies Ticker / Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="mt-16 pt-8 border-t border-slate-200/80 dark:border-slate-800/80"
-        >
-          <p className="text-center text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4 flex items-center justify-center gap-2">
-            <Building2 className="w-4 h-4 text-blue-600 dark:text-sky-400" />
-            <span>Targeting Data Internship Opportunities At Top Firms</span>
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-5xl mx-auto">
-            {PORTFOLIO_DATA.personal.targetCompanies.map((comp) => (
-              <div
-                key={comp.name}
-                className="px-3.5 py-1.5 rounded-xl bg-slate-200/60 dark:bg-slate-900/60 border border-slate-300/80 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-500/40 transition-colors shadow-sm"
-              >
-                {comp.name}
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
       </div>
     </section>
   );

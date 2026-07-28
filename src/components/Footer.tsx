@@ -1,6 +1,6 @@
-import React from 'react';
-import { Heart, BarChart2, Linkedin, Github, Mail } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../data/portfolioData';
+import React from "react";
+import { Heart, BarChart2, Linkedin, Github, Mail } from "lucide-react";
+import { PORTFOLIO_DATA } from "../data/portfolioData";
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -11,16 +11,17 @@ export const Footer: React.FC = () => {
       const navOffset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     }
   };
 
   return (
-    <footer id="main-footer" className="bg-slate-900 text-slate-400 pt-12 pb-8 border-t border-slate-800">
+    <footer
+      id="main-footer"
+      className="bg-slate-900 text-slate-400 pt-12 pb-8 border-t border-slate-800"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-slate-800">
-          
           {/* Col 1: Brand */}
           <div className="md:col-span-5 space-y-3">
             <div className="flex items-center gap-2.5">
@@ -30,12 +31,14 @@ export const Footer: React.FC = () => {
                 </div>
               </div>
               <span className="font-outfit font-extrabold text-xl text-white">
-                Chandni Kumari 🤎
+                Chandni Kumari
               </span>
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-md">
-              Aspiring Data Analyst passionate about converting raw metrics into actionable Business Intelligence. Skilled in Power BI, SQL, Python, and Excel.
+              Aspiring Data Analyst passionate about converting raw metrics into
+              actionable Business Intelligence. Skilled in Power BI, SQL,
+              Python, and Excel.
             </p>
 
             <p className="text-xs font-semibold text-sky-400">
@@ -49,13 +52,48 @@ export const Footer: React.FC = () => {
               Navigation
             </h4>
             <div className="grid grid-cols-2 gap-2 text-xs font-medium">
-              <button onClick={() => handleScrollTo('home')} className="text-left hover:text-sky-400 transition-colors cursor-pointer">Home</button>
-              <button onClick={() => handleScrollTo('about')} className="text-left hover:text-sky-400 transition-colors cursor-pointer">About</button>
-              <button onClick={() => handleScrollTo('skills')} className="text-left hover:text-sky-400 transition-colors cursor-pointer">Skills</button>
-              <button onClick={() => handleScrollTo('projects')} className="text-left hover:text-sky-400 transition-colors cursor-pointer">Projects</button>
-              <button onClick={() => handleScrollTo('resume')} className="text-left hover:text-sky-400 transition-colors cursor-pointer">Resume</button>
-              <button onClick={() => handleScrollTo('education')} className="text-left hover:text-sky-400 transition-colors cursor-pointer">Education</button>
-              <button onClick={() => handleScrollTo('contact')} className="text-left hover:text-sky-400 transition-colors cursor-pointer">Contact</button>
+              <button
+                onClick={() => handleScrollTo("home")}
+                className="text-left hover:text-sky-400 transition-colors cursor-pointer"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => handleScrollTo("about")}
+                className="text-left hover:text-sky-400 transition-colors cursor-pointer"
+              >
+                About
+              </button>
+              <button
+                onClick={() => handleScrollTo("skills")}
+                className="text-left hover:text-sky-400 transition-colors cursor-pointer"
+              >
+                Skills
+              </button>
+              <button
+                onClick={() => handleScrollTo("projects")}
+                className="text-left hover:text-sky-400 transition-colors cursor-pointer"
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => handleScrollTo("resume")}
+                className="text-left hover:text-sky-400 transition-colors cursor-pointer"
+              >
+                Resume
+              </button>
+              <button
+                onClick={() => handleScrollTo("education")}
+                className="text-left hover:text-sky-400 transition-colors cursor-pointer"
+              >
+                Education
+              </button>
+              <button
+                onClick={() => handleScrollTo("contact")}
+                className="text-left hover:text-sky-400 transition-colors cursor-pointer"
+              >
+                Contact
+              </button>
             </div>
           </div>
 
@@ -94,18 +132,18 @@ export const Footer: React.FC = () => {
               </a>
             </div>
           </div>
-
         </div>
 
         {/* Bottom Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <p className="flex items-center gap-1.5 font-medium">
-            Made with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline" /> by <span className="text-slate-200 font-bold">Chandni Kumari</span>
+            Made with{" "}
+            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline" />{" "}
+            by <span className="text-slate-200 font-bold">Chandni Kumari</span>
           </p>
 
           <p>© {currentYear} Chandni Kumari. All rights reserved.</p>
         </div>
-
       </div>
     </footer>
   );
