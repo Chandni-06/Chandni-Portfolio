@@ -120,7 +120,7 @@ export const Navbar: React.FC = () => {
           })}
         </nav>
 
-        {/* Right CTA & Theme Toggle */}
+        {/* Right CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <a
             href="#resume"

@@ -14,7 +14,7 @@ function AppShell() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0B1120] text-slate-900 dark:text-slate-100 relative selection:bg-blue-500 selection:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-[#0B1120] text-slate-100 relative selection:bg-blue-500 selection:text-white transition-colors duration-300">
       <ScrollProgress />
       <CursorGlow />
       <Navbar />
@@ -36,7 +36,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-slate-50 dark:bg-[#0B1120] text-slate-900 dark:text-slate-100 relative selection:bg-blue-500 selection:text-white transition-colors duration-300">
+      <div className="min-h-screen bg-[#0B1120] text-slate-100 relative selection:bg-blue-500 selection:text-white transition-colors duration-300">
         {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
 
         {!isLoading && <AppShell />}
