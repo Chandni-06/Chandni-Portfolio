@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
+/* Use the site's .dark class, never the visitor's operating-system preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
   html,
   body,
   #root {
