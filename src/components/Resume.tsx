@@ -15,8 +15,7 @@ import { PORTFOLIO_DATA } from "../data/portfolioData";
 export const Resume: React.FC = () => {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const resumeFilePath =
-    PORTFOLIO_DATA.personal.resumePdf || "/images/Chandni Resume.pdf";
+  const resumeFilePath = PORTFOLIO_DATA.personal.resumePdf;
 
   const showUnavailableToast = () => {
     setToastMessage("Resume is currently unavailable.");

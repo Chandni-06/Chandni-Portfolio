@@ -67,7 +67,7 @@ export const PORTFOLIO_DATA = {
     location: "Bengaluru, Karnataka, India",
     github: "https://github.com/Chandni-06",
     linkedin: "https://www.linkedin.com/in/chandni-kumari-099117371",
-    resumePdf: "/images/Chandni_Resume.pdf",
+    resumePdf: "/Chandni_Kumari_Resume.pdf",
     targetCompanies: [
       { name: "Deloitte", logo: "Building2" },
       { name: "Accenture", logo: "Briefcase" },
@@ -235,83 +235,82 @@ export const PORTFOLIO_DATA = {
         "Popular Cuisine Share, Rating Distribution & Price Range Analysis",
         "Interactive Filters, Dynamic Slicers & Drill-through Analytics",
       ],
-      coverImage:
-        "https://drive.google.com/file/d/1YxQd8s8W0Ik7qiWUBIHLBPABw7GoJmea/view?usp=sharing",
+      coverImage: "/images/projects/zomato-dashboard/Img-1.jpeg",
       githubUrl:
         "https://github.com/Chandni-06/zomato-restaurant-analysis-dashboard",
-      liveDemoUrl: "/images/projects/zomato-dashboard/dashboard.png",
-      reportUrl: "/images/projects/zomato-dashboard/insights.png",
+      liveDemoUrl: "/images/projects/zomato-dashboard/Img-1.jpeg",
+      reportUrl: "/images/projects/zomato-dashboard/Img-1.jpeg",
       gallery: [
         {
           id: "zom-1",
           title: "Dashboard Overview Banner",
           caption:
             "Main executive Power BI banner displaying 9,551 total restaurants, 4.21 average rating, ₹580 average cost for two, and 78.4% online delivery share.",
-          url: "https://drive.google.com/file/d/1YxQd8s8W0Ik7qiWUBIHLBPABw7GoJmea/view?usp=sharing",
+          url: "/images/projects/zomato-dashboard/Img-1.jpeg",
         },
         {
           id: "zom-2",
           title: "Full Power BI Interactive Dashboard View",
           caption:
             "Interactive report view with filter slicers, rating scatter plot, price range buckets, and city distribution.",
-          url: "/images/projects/zomato-dashboard/dashboard.png",
+          url: "/images/projects/zomato-dashboard/img-2.jpg",
         },
         {
           id: "zom-3",
           title: "Executive Summary & Leaderboard",
           caption:
             "Executive KPI cards and city-wise leaderboard comparing New Delhi, Gurgaon, Noida, Bengaluru, and Mumbai.",
-          url: "/images/projects/zomato-dashboard/overview.png",
+          url: "/images/projects/zomato-dashboard/img-3.jpg",
         },
         {
           id: "zom-4",
           title: "Customer Rating Distribution",
           caption:
             "Rating breakdown histogram comparing ratings from 1.0 to 5.0 stars and customer sentiment clusters.",
-          url: "/images/projects/zomato-dashboard/ratings.png",
+          url: "/images/projects/zomato-dashboard/img-4.jpg",
         },
-        {
-          id: "zom-5",
-          title: "Popular Cuisines & Diversity Matrix",
-          caption:
-            "Treemap and donut charts identifying North Indian (34%), Chinese (22%), Fast Food (18%), and Italian offerings.",
-          url: "/images/projects/zomato-dashboard/cuisines.png",
-        },
-        {
-          id: "zom-6",
-          title: "Geographic City-wise Distribution",
-          caption:
-            "Detailed city matrix comparing restaurant counts, average rating, average cost for two, and delivery adoption.",
-          url: "/images/projects/zomato-dashboard/city-analysis.png",
-        },
-        {
-          id: "zom-7",
-          title: "Online Delivery & Table Booking Analysis",
-          caption:
-            "Key service capability analysis showing 78.4% online delivery adoption vs 12.1% table booking availability.",
-          url: "/images/projects/zomato-dashboard/online-delivery.png",
-        },
-        {
-          id: "zom-8",
-          title: "Price Range Segmentation",
-          caption:
-            "Price bucket breakdown across Budget (Range 1: 46.5%), Mid-Range (Range 2: 32.6%), Premium (14.7%), and Luxury (6.2%).",
-          url: "/images/projects/zomato-dashboard/price-analysis.png",
-        },
-        {
-          id: "zom-9",
-          title: "Dynamic Slicers & Filter Controls",
-          caption:
-            "Power BI dynamic filter pane allowing multi-select city filters, online delivery toggles, and rating sliders.",
-          url: "/images/projects/zomato-dashboard/filters.png",
-        },
-        {
-          id: "zom-10",
-          title: "Strategic Business Insights",
-          caption:
-            "Executive insights highlighting delivery impact (+0.4★ rating boost), cuisine gaps, and market expansion opportunities.",
-          url: "/images/projects/zomato-dashboard/insights.png",
-        },
+        // {
+        //   id: "zom-5",
+        //   title: "Popular Cuisines & Diversity Matrix",
+        //   caption:
+        //     "Treemap and donut charts identifying North Indian (34%), Chinese (22%), Fast Food (18%), and Italian offerings.",
+        //   url: "/images/projects/zomato-dashboard/cuisines.png",
+        // },
+        // {
+        //   id: "zom-6",
+        //   title: "Geographic City-wise Distribution",
+        //   caption:
+        //     "Detailed city matrix comparing restaurant counts, average rating, average cost for two, and delivery adoption.",
+        //   url: "/images/projects/zomato-dashboard/city-analysis.png",
+        // },
+        // {
+        //   id: "zom-7",
+        //   title: "Online Delivery & Table Booking Analysis",
+        //   caption:
+        //     "Key service capability analysis showing 78.4% online delivery adoption vs 12.1% table booking availability.",
+        //   url: "/images/projects/zomato-dashboard/online-delivery.png",
+        // },
+        // {
+        //   id: "zom-8",
+        //   title: "Price Range Segmentation",
+        //   caption:
+        //     "Price bucket breakdown across Budget (Range 1: 46.5%), Mid-Range (Range 2: 32.6%), Premium (14.7%), and Luxury (6.2%).",
+        //   url: "/images/projects/zomato-dashboard/price-analysis.png",
+        // },
+        // {
+        //   id: "zom-9",
+        //   title: "Dynamic Slicers & Filter Controls",
+        //   caption:
+        //     "Power BI dynamic filter pane allowing multi-select city filters, online delivery toggles, and rating sliders.",
+        //   url: "/images/projects/zomato-dashboard/filters.png",
+        // },
+        // {
+        //   id: "zom-10",
+        //   title: "Strategic Business Insights",
+        //   caption:
+        //     "Executive insights highlighting delivery impact (+0.4★ rating boost), cuisine gaps, and market expansion opportunities.",
+        //   url: "/images/projects/zomato-dashboard/insights.png",
+        // },
       ],
       caseStudy: {
         problemStatement:
@@ -360,45 +359,37 @@ export const PORTFOLIO_DATA = {
         "Top 10 Products & Category Profitability Breakdown",
         "Actionable Business Insights & Trend Forecasting",
       ],
-      coverImage:
-        "https://drive.google.com/file/d/17T-jIScYNCMxxvCbY0TjCE5nzj2zRouT/view?usp=sharing",
+      coverImage: "/images/projects/company-sales/img-1.jpg",
       githubUrl: "https://github.com/chandni-kumari/company-sales-dashboard",
-      liveDemoUrl: "https://app.powerbi.com/view?r=example_sales_dashboard",
+      liveDemoUrl: "/images/projects/company-sales/img-1.jpg",
       gallery: [
         {
           id: "cs-1",
           title: "Executive Overview Dashboard",
           caption:
             "Main executive screen displaying total sales ($4.8M), YoY growth (+18.4%), and top product performance.",
-          url: "/images/projects/company-sales/dashboard.svg",
+          url: "/images/projects/company-sales/img-1.jpg",
         },
         {
           id: "cs-2",
           title: "Regional Sales Map",
           caption:
             "Geographical heatmap analysis showing revenue density across North America and Europe.",
-          url: "/images/projects/company-sales/sales-map.svg",
+          url: "/images/projects/company-sales/img-2.jpg",
         },
         {
           id: "cs-3",
           title: "Category & Monthly Charts",
           caption:
             "Deep dive into Technology vs Office Supplies sales seasonality and quarterly profit margins.",
-          url: "/images/projects/company-sales/charts.svg",
+          url: "/images/projects/company-sales/img-3.jpg",
         },
         {
           id: "cs-4",
           title: "KPI Breakdown & Slicers",
           caption:
             "Custom DAX-powered KPI cards dynamically updating based on date range and region slicers.",
-          url: "/images/projects/company-sales/kpi.svg",
-        },
-        {
-          id: "cs-5",
-          title: "Business Insights Summary",
-          caption:
-            "Key takeaways highlighting highest margin regions and underperforming sales channels.",
-          url: "/images/projects/company-sales/insights.svg",
+          url: "/images/projects/company-sales/img-4.jpg",
         },
       ],
       caseStudy: {
@@ -444,46 +435,45 @@ export const PORTFOLIO_DATA = {
         "Gender Ratio & Literacy Rate Correlational Slicers",
         "Top & Bottom 5 States Performance Charts",
       ],
-      coverImage: "/images/projects/population-dashboard/cover.svg",
+      coverImage: "/images/projects/population-dashboard/img-3.jpg",
       githubUrl:
         "https://github.com/chandni-kumari/population-of-india-dashboard",
-      liveDemoUrl:
-        "https://drive.google.com/file/d/18rmJ6A3lFvlLFcCDwUEEdxMTXH062Od5/view?usp=sharing",
+      liveDemoUrl: "/images/projects/population-dashboard/img-3.jpg",
       gallery: [
         {
           id: "pop-1",
           title: "Population of India Power BI Dashboard",
           caption:
             "Interactive Power BI report featuring 1Bn+ Total Population, 623M Male count, interactive India State/UT map, Rural vs Urban bar chart, and Area table.",
-          url: "/images/projects/population-dashboard/dashboard.svg",
+          url: "/images/projects/population-dashboard/img-3.jpg",
         },
         {
           id: "pop-2",
           title: "India State & UT Geographical Map",
           caption:
             "Map visualization displaying spatial distribution across all Indian States and Union Territories.",
-          url: "/images/projects/population-dashboard/population-map.svg",
+          url: "/images/projects/population-dashboard/img-2.jpg",
         },
         {
           id: "pop-3",
           title: "Rural vs Urban Population Split",
           caption:
             "Stacked horizontal bar charts comparing rural and urban demographic composition by State/UT.",
-          url: "/images/projects/population-dashboard/dashboard.svg",
+          url: "/images/projects/population-dashboard/img-1.jpg",
         },
         {
           id: "pop-4",
           title: "Geographical Land Area Breakdown",
           caption:
             "Detailed tabular view displaying total land area per state (Sum of Area = 3,289,360 sq km).",
-          url: "/images/projects/population-dashboard/dashboard.svg",
+          url: "/images/projects/population-dashboard/img-4.jpg",
         },
         {
           id: "pop-5",
           title: "Executive Report View",
           caption:
             "Full view of the Power BI interface with field pane, custom DAX measures, and active slicers.",
-          url: "/images/projects/population-dashboard/cover.svg",
+          url: "/images/projects/population-dashboard/img-5.jpg",
         },
       ],
       caseStudy: {
@@ -576,7 +566,7 @@ export const PORTFOLIO_DATA = {
       institution: "Bengaluru City University",
       period: "2022 - Present",
       status: "Pursuing (Final Year)",
-      score: "CGPA: 8.8 / 10",
+      score: "CGPA: 7.5 / 10",
       description:
         "Specializing in Computer Science fundamentals, Database Management Systems (DBMS), Data Analytics, Python Programming, and Software Engineering.",
       highlights: [

@@ -153,7 +153,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             <span className="text-xs text-slate-400">PDF Format • Updated 2026</span>
             <div className="flex items-center gap-2">
               <a
-                href="/images/Chandni Resume.pdf"
+                href="/Chandni_Kumari_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 id="modal-view-pdf-btn"
@@ -163,8 +163,8 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 <span>View PDF</span>
               </a>
               <a
-                href="/images/Chandni Resume.pdf"
-                download="Chandni Resume.pdf"
+                href="/Chandni_Kumari_Resume.pdf"
+                download="Chandni_Kumari_Resume.pdf"
                 id="modal-download-pdf-btn"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-colors cursor-pointer shadow-md shadow-blue-500/20"
               >
