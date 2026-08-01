@@ -1,151 +1,203 @@
-import express from 'express';
-import path from 'path';
-import dotenv from 'dotenv';
-import { GoogleGenAI } from '@google/genai';
-import { createServer as createViteServer } from 'vite';
+import express from "express";
+import path from "path";
+import dotenv from "dotenv";
+import nodemailer from "nodemailer";
+import { createServer as createViteServer } from "vite";
+import { registerChatRoute } from "./server/chatRoute";
 
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT || 3000);
 
 app.use(express.json());
 
-// Lazy-initialized Gemini client helper
-let aiClient: GoogleGenAI | null = null;
-function getGeminiClient(): GoogleGenAI {
-  if (!aiClient) {
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      throw new Error('GEMINI_API_KEY environment variable is not configured.');
-    }
-    aiClient = new GoogleGenAI({
-      apiKey,
-      httpOptions: {
-        headers: {
-          'User-Agent': 'aistudio-build',
-        },
-      },
-    });
-  }
-  return aiClient;
+interface ContactRequestBody {
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
 }
 
-const CHANDNI_SYSTEM_INSTRUCTION = `You are "AI Chandni", an interactive AI Career Assistant representing Chandni Kumari on her personal data analyst portfolio website.
-You speak strictly in the FIRST PERSON ("I", "my", "me") as if you ARE Chandni Kumari.
+const sanitizeInput = (text: string): string => {
+  if (!text) return "";
 
-RULES & PERSONA:
-1. Always speak in the FIRST PERSON as Chandni Kumari. Example: Say "I built an interactive Power BI sales dashboard using DAX measures" NOT "Chandni built..." or "Chandni knows...".
-2. NEVER say "As an AI...", "As a language model...", "As an AI assistant...", or "I am ChatGPT". You are AI Chandni representing Chandni Kumari.
-3. Personality: Professional, Friendly, Confident, Honest, Enthusiastic, Recruiter-friendly. Keep answers conversational, warm, and concise.
-4. KNOWLEDGE BOUNDARY: Answer ONLY based on Chandni Kumari's real resume, portfolio projects, skills, education, and career experience detailed below. Never fabricate achievements or work experience.
-5. UNRELATED QUESTIONS: If a visitor asks questions completely unrelated to Chandni, her background, skills, or career (e.g. "Who won the World Cup?", "What is Bitcoin?", "Latest News", "Movies", "Politics", "Sports", "Weather", etc.), reply EXACTLY with:
-   "I'm designed to answer questions about Chandni, her projects, skills and career. I'd be happy to tell you more about those!"
-6. UNKNOWN/UNHANDLED TECH OR EXPERIENCES: If a visitor asks about a skill, tool, or experience that isn't in Chandni's portfolio or resume, reply politely:
-   "I haven't worked on that yet, but I'm currently learning and would love the opportunity to explore it."
-7. CALL TO ACTION: Regularly encourage visitors to check out my interactive Power BI project case studies, GitHub repositories, and downloadable resume on this website!
+  return text.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+};
 
-CHANDNI KUMARI'S PROFILE DATA:
-- Full Name: Chandni Kumari (Chandni 🤎)
-- Role: Aspiring Data Analyst
-- Tagline: Turning Data into Meaningful Insights
-- Summary: Aspiring Data Analyst pursuing BCA with an 8.8 CGPA at Bengaluru City University. Knowledgeable in Power BI, SQL, Python, and Excel. Passionate about data visualization, database modeling, DAX calculations, and solving business challenges with data.
-- Status: Actively seeking Data Analyst Internship opportunities (2025/2026 Batch).
-- Education:
-  • Bachelor of Computer Applications (BCA) at Bengaluru City University (Pursuing, CGPA 8.8, 2022 - Present)
-  • Higher Secondary Education (12th Grade) at CBSE Board (2022 - 2024, 60%, School topper in English)
-  • Matriculation (10th Grade) at JAC Board (2020, 79.06% with distinction)
-- Core Skills:
-  • Power BI: Power Query (M Language), DAX Calculations, Star Schema Modeling, Interactive Dashboards, Custom Slicers, Report Publishing.
-  • SQL: Relational DBMS, Joins (Inner/Left/Right/Full), Aggregations (GROUP BY, HAVING), Subqueries, CTEs, Window Functions, DML/DDL.
-  • Python: Data Manipulation & Cleaning with Pandas, Numerical Analysis with NumPy, Visualizations with Matplotlib & Seaborn.
-  • Excel: Advanced Formulas (XLOOKUP, INDEX/MATCH, SUMIFS), Pivot Tables, Data Cleaning, Conditional Formatting, KPI Alerts.
-  • Soft Competencies: Problem Solving, Critical Thinking, Business Intelligence, Data Storytelling, Collaboration.
-- Projects:
-  1. "Sales & Financial Performance Dashboard" (Power BI):
-     - Built an interactive Power BI report analyzing revenue, profit margins, regional sales distribution, and product profitability.
-     - Created custom DAX time-intelligence measures (YoY Growth, YTD Revenue, Moving Averages).
-     - Resulted in identifying top 15% revenue-generating customer segments and uncovering a 12% margin slippage in underperforming regions.
-  2. "India Demographics & Urbanization Study" (Python):
-     - Executed exploratory data analysis (EDA) on state-wise census & population metrics using Pandas and Matplotlib.
-     - Cleared missing values, normalized literacy rates vs. urban growth indicators, and generated distribution plots.
-     - Uncovered key correlations between female literacy rates and urbanization density across Indian states.
-  3. "Retail Supply Chain & Inventory Optimizer" (Excel):
-     - Developed an advanced Excel workbook model to calculate stock turnover rates, safety stock thresholds, and reorder alerts.
-     - Utilized dynamic XLOOKUP, INDEX/MATCH, nested IFs, and automated Pivot Tables with conditional formatting.
-     - Reduced modeled stock-out risk by 18% and improved inventory forecasting accuracy.
-- Target Roles: Data Analyst Intern, Junior BI Developer, Business Intelligence Intern, SQL & Analytics Associate.
-- Location: Bengaluru, Karnataka, India.
-- Contact: Email: vchandni040@gmail.com, Phone: +91 7019549199, LinkedIn: www.linkedin.com/in/chandni-kumari-099117371, GitHub: https://github.com/Chandni-06.`;
+const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email.trim());
+};
 
-// AI Assistant Chat Route
-app.post('/api/chat', async (req, res) => {
+const escapeHtml = (text: string): string =>
+  text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+let contactMailer: ReturnType<typeof nodemailer.createTransport> | null = null;
+
+function getContactMailer() {
+  if (contactMailer) {
+    return contactMailer;
+  }
+
+  const smtpHost = process.env.SMTP_HOST;
+  const smtpPort = Number(process.env.SMTP_PORT || "587");
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS;
+  const smtpSecure = process.env.SMTP_SECURE === "true" || smtpPort === 465;
+
+  if (!smtpHost || !smtpUser || !smtpPass) {
+    throw new Error("SMTP_HOST, SMTP_USER, and SMTP_PASS must be configured.");
+  }
+
+  contactMailer = nodemailer.createTransport({
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpSecure,
+    auth: {
+      user: smtpUser,
+      pass: smtpPass,
+    },
+  });
+
+  return contactMailer;
+}
+
+app.post("/api/contact", async (req, res) => {
   try {
-    const { message, history } = req.body;
+    const body = req.body as ContactRequestBody;
+    const name = sanitizeInput(body.name || "");
+    const email = sanitizeInput(body.email || "");
+    const subject =
+      sanitizeInput(body.subject || "") || "New Portfolio Contact";
+    const message = sanitizeInput(body.message || "");
 
-    if (!message || typeof message !== 'string') {
-      return res.status(400).json({ error: 'Message text is required.' });
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        success: false,
+        message: "Please fill in all required fields.",
+      });
     }
 
-    const ai = getGeminiClient();
-
-    // Prepare contents with history if provided
-    const contents: Array<{ role: string; parts: Array<{ text: string }> }> = [];
-
-    if (Array.isArray(history)) {
-      for (const item of history) {
-        if (item.role && item.text) {
-          contents.push({
-            role: item.role === 'user' ? 'user' : 'model',
-            parts: [{ text: item.text }],
-          });
-        }
-      }
+    if (!isValidEmail(email)) {
+      return res.status(400).json({
+        success: false,
+        message: "Please enter a valid email address.",
+      });
     }
 
-    contents.push({
-      role: 'user',
-      parts: [{ text: message }],
+    const transporter = getContactMailer();
+    const ownerEmail =
+      process.env.CONTACT_RECIPIENT_EMAIL ||
+      process.env.SMTP_USER ||
+      "vchandni040@gmail.com";
+    const fromAddress = process.env.SMTP_FROM || process.env.SMTP_USER;
+    const submissionDate = new Date().toLocaleString("en-US", {
+      dateStyle: "full",
+      timeStyle: "medium",
     });
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.6-flash',
-      contents,
-      config: {
-        systemInstruction: CHANDNI_SYSTEM_INSTRUCTION,
-        temperature: 0.7,
-        topP: 0.9,
-      },
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeSubject = escapeHtml(subject);
+    const safeMessage = escapeHtml(message).replace(/\n/g, "<br />");
+
+    const ownerMailHtml = `
+      <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0f172a;">
+        <h2 style="margin:0 0 12px;">New portfolio contact submission</h2>
+        <p><strong>Name:</strong> ${safeName}</p>
+        <p><strong>Email:</strong> ${safeEmail}</p>
+        <p><strong>Subject:</strong> ${safeSubject}</p>
+        <p><strong>Submitted:</strong> ${escapeHtml(submissionDate)}</p>
+        <p><strong>Message:</strong></p>
+        <div style="padding:14px;border-left:4px solid #2563eb;background:#eff6ff;border-radius:8px;">${safeMessage}</div>
+      </div>
+    `;
+
+    const autoReplyHtml = `
+      <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0f172a;">
+        <h2 style="margin:0 0 12px;">Thanks for reaching out, ${safeName}</h2>
+        <p>I received your message about <strong>${safeSubject}</strong> and I will reply soon.</p>
+        <p style="margin-top:16px;"><strong>Your message:</strong></p>
+        <div style="padding:14px;border-left:4px solid #0f766e;background:#f0fdfa;border-radius:8px;">${safeMessage}</div>
+        <p style="margin-top:16px;">If needed, you can reply directly to this email and I will see it in my inbox.</p>
+      </div>
+    `;
+
+    const ownerText = [
+      "New portfolio contact submission",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Subject: ${subject}`,
+      `Submitted: ${submissionDate}`,
+      "Message:",
+      message,
+    ].join("\n\n");
+
+    const autoReplyText = [
+      `Thanks for reaching out, ${name}`,
+      `I received your message about "${subject}" and I will reply soon.`,
+      "",
+      "Your message:",
+      message,
+    ].join("\n");
+
+    await transporter.sendMail({
+      from: fromAddress,
+      to: ownerEmail,
+      replyTo: email,
+      subject: `[Portfolio Contact] ${subject}`,
+      text: ownerText,
+      html: ownerMailHtml,
     });
 
-    const replyText = response.text || "I'm happy to tell you more about my portfolio, projects, and skills!";
+    await transporter.sendMail({
+      from: fromAddress,
+      to: email,
+      replyTo: ownerEmail,
+      subject: `Thanks for your message, ${name}`,
+      text: autoReplyText,
+      html: autoReplyHtml,
+    });
 
-    return res.json({ reply: replyText });
+    return res.json({
+      success: true,
+      message:
+        "Thank you! Your message has been sent successfully. I'll get back to you soon.",
+    });
   } catch (err: any) {
-    console.error('Error in /api/chat:', err);
+    console.error("Error in /api/contact:", err);
     return res.status(500).json({
-      error: 'Failed to process AI request.',
-      details: err.message || 'Server error',
+      success: false,
+      message: "Failed to send the contact message.",
+      details: err.message || "Server error",
     });
   }
 });
 
+registerChatRoute(app);
+
 async function startServer() {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: 'spa',
+      appType: "spa",
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'dist');
+    const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://0.0.0.0:${PORT}`);
   });
 }
