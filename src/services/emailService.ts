@@ -46,8 +46,14 @@ export const sendContactEmail = async (
     throw new Error("Please enter a valid email address.");
   }
 
+  const defaultContactEndpoint = [
+    "/",
+    ".netlify",
+    "/functions/",
+    "contact",
+  ].join("");
   const contactEndpoint =
-    import.meta.env.VITE_CONTACT_ENDPOINT || "/.netlify/functions/contact";
+    import.meta.env.VITE_CONTACT_ENDPOINT || defaultContactEndpoint;
 
   const response = await fetch(contactEndpoint, {
     method: "POST",
