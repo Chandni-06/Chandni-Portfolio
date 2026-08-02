@@ -149,17 +149,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ className = "" }) => {
             className="w-full h-full object-cover object-top rounded-full transform group-hover:scale-105 transition-transform duration-700"
             referrerPolicy="no-referrer"
           />
-
-          {/* Floating "Available for Internship" Badge below Circular Image */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 px-4 py-2 rounded-full bg-slate-950/90 border border-emerald-500/70 shadow-2xl backdrop-blur-md flex items-center gap-2.5 whitespace-nowrap">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-            </span>
-            <span className="text-xs sm:text-sm font-extrabold text-white tracking-wide">
-              Available for Internship
-            </span>
-          </div>
         </div>
       </motion.div>
 
