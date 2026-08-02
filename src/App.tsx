@@ -26,7 +26,7 @@ function AppShell() {
 
       <Footer />
       <BackToTop />
-      <AICareerAssistant />
+      {/* <AICareerAssistant /> */}
     </div>
   );
 }
