@@ -247,8 +247,8 @@ export const Contact: React.FC = () => {
                     <Sparkles className="w-5 h-5 text-amber-400" />
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    Powered by SMTP — messages go to my inbox and you receive a
-                    copy too.
+                    Powered by serverless SMTP — messages go straight to my
+                    inbox.
                   </p>
                 </div>
               </div>

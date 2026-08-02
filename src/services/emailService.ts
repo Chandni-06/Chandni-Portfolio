@@ -28,7 +28,7 @@ export const isValidEmail = (email: string): boolean => {
 };
 
 /**
- * Sends portfolio contact form via EmailJS
+ * Sends the portfolio contact form to the configured serverless endpoint.
  */
 export const sendContactEmail = async (
   params: EmailParams,
@@ -46,48 +46,42 @@ export const sendContactEmail = async (
     throw new Error("Please enter a valid email address.");
   }
 
-  try {
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        subject,
-        message,
-      }),
-    });
+  const contactEndpoint =
+    import.meta.env.VITE_CONTACT_ENDPOINT || "/.netlify/functions/contact";
 
-    const data = (await response
-      .json()
-      .catch(() => ({}))) as Partial<EmailResponse> & {
-      error?: string;
-      details?: string;
-    };
+  const response = await fetch(contactEndpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name,
+      email,
+      subject,
+      message,
+    }),
+  });
 
-    if (!response.ok || !data.success) {
-      throw new Error(
-        data.message ||
-          data.error ||
-          data.details ||
-          "Something went wrong. Please try again later.",
-      );
-    }
+  const data = (await response
+    .json()
+    .catch(() => ({}))) as Partial<EmailResponse> & {
+    error?: string;
+    details?: string;
+  };
 
-    return {
-      success: true,
-      message:
-        data.message ||
-        "Thank you! Your message has been sent successfully. I'll get back to you soon.",
-    };
-  } catch (error: any) {
-    console.error("Contact form submission error:", error);
+  if (!response.ok || !data.success) {
     throw new Error(
-      error?.text ||
-        error?.message ||
+      data.message ||
+        data.error ||
+        data.details ||
         "Something went wrong. Please try again later.",
     );
   }
+
+  return {
+    success: true,
+    message:
+      data.message ||
+      "Thank you! Your message has been sent successfully. I'll get back to you soon.",
+  };
 };
